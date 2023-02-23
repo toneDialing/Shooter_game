@@ -7,7 +7,8 @@ local player_ypos = 10
 local player_speed = 180
 local player_max_ypos = 140 -- max distance player can move down on screen
 
-local bullet_counter -- keeps track of all bullets in play
+local max_ammo = 6 -- max bullets allowed
+local ammo_remaining = max_ammo -- keeps track of all bullets in play
 
 function Player:init()
     self.texture = love.graphics.newImage("player.png") -- normal green rectangle
@@ -20,6 +21,9 @@ function Player:init()
     self.dy = 0
 
     all_bullets = {}
+
+    standard_font = love.graphics.newFont("Capture it.ttf", 30)
+    love.graphics.setFont(standard_font)
 end
 
 function Player:update(dt)
@@ -40,9 +44,17 @@ function Player:update(dt)
 
     -- shoot bullets upon pressing space bar
     -- PROBLEM: bullets need to be removed from memory once they disappear from the screen
-    if love.keyboard.was_key_pressed("space") then
-        bullet = Bullet(self.x + (self.width/2), self.y + self.height, #all_bullets+1)
-        all_bullets[bullet.bullet_number] = bullet
+    if love.keyboard.pressed['space'] then
+        if ammo_remaining > 0 then
+            bullet = Bullet(self.x + (self.width/2), self.y + self.height)
+            table.insert(all_bullets, bullet)
+            ammo_remaining = ammo_remaining - 1
+        end
+    end
+
+    -- Press 'r' to reload
+    if love.keyboard.pressed['r'] then
+        ammo_remaining = 6
     end
 
     -- update player
@@ -64,7 +76,17 @@ function Player:draw()
     love.graphics.draw(self.texture, self.x, self.y)
 
     -- draw bullet(s)
-    for _, v in ipairs(all_bullets) do
-        v:draw()
+    for i, v in ipairs(all_bullets) do
+        if v.out_of_play then -- bullet is offscreen
+            table.remove(all_bullets, i) -- remove bullet object from table
+            --[[ Supposedly Lua has automatic garbage management, but nonetheless I'm unsure
+                how to properly remove each bullet from memory once it's offscreen. The best
+                I've come up with thus far is to simply remove it from the all_bullets table,
+                thereby no longer calling update() and draw() for that object. ]]
+        else
+            v:draw()
+        end
     end
+
+    love.graphics.print("Ammo: " .. ammo_remaining, 665, 5)
 end

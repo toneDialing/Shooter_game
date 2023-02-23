@@ -24,10 +24,6 @@ function love.keypressed(key)
     love.keyboard.pressed[key] = true
 end
 
-function love.keyboard.was_key_pressed(key)
-    return love.keyboard.pressed[key]
-end
-
 function love.update(dt)
     player:update(dt)
 
