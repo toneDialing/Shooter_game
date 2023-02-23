@@ -42,8 +42,7 @@ function Player:update(dt)
         self.dy = 0
     end
 
-    -- shoot bullets upon pressing space bar
-    -- PROBLEM: bullets need to be removed from memory once they disappear from the screen
+    -- Press 'space' to shoot
     if love.keyboard.pressed['space'] then
         if ammo_remaining > 0 then
             bullet = Bullet(self.x + (self.width/2), self.y + self.height)
