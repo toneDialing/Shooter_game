@@ -1,3 +1,5 @@
+-- Working game title: "Six Shots"
+
 Class = require 'class'
 require 'player'
 
@@ -7,6 +9,7 @@ WINDOW_HEIGHT = 600
 
 function love.load()
     love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
+    love.window.setTitle("Six Shots")
     love.graphics.setDefaultFilter("nearest", "nearest")
 
     -- table to keep track of which keys have been pressed once
