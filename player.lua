@@ -53,7 +53,7 @@ function Player:update(dt)
 
     -- Press 'r' to reload
     if love.keyboard.pressed['r'] then
-        ammo_remaining = 6
+        ammo_remaining = max_ammo
     end
 
     -- update player
