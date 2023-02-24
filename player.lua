@@ -6,26 +6,26 @@ local player_xpos = 100
 local player_ypos = 10
 local player_speed = 180
 local player_max_ypos = 140 -- max distance player can move down on screen
-local player_initial_direction = 4
+
+local direction_left = "left"
+local direction_right = "right"
+local direction_up = "up"
+local direction_down = "down"
+local player_initial_direction = direction_down
 
 local max_ammo = 6 -- max bullets allowed
 local ammo_remaining = max_ammo -- keeps track of all bullets in play
 
 function Player:init()
-    self.texture_left = love.graphics.newImage("player_left.png")
-    self.texture_right = love.graphics.newImage("player_right.png")
-    self.texture_up = love.graphics.newImage("player_up.png")
-    self.texture_down = love.graphics.newImage("player_down.png")
-    self.texture = {
-        self.texture_left,
-        self.texture_right,
-        self.texture_up,
-        self.texture_down
-    }
+    self.texture = {}
+    self.texture[direction_left] = love.graphics.newImage("player_left.png")
+    self.texture[direction_right] = love.graphics.newImage("player_right.png")
+    self.texture[direction_up] = love.graphics.newImage("player_up.png")
+    self.texture[direction_down] = love.graphics.newImage("player_down.png")
     self.x = player_xpos
     self.y = player_ypos
-    self.width = self.texture_left:getWidth()
-    self.height = self.texture_left:getHeight()
+    self.width = self.texture[direction_left]:getWidth() -- all direction textures have same dimensions
+    self.height = self.texture[direction_left]:getHeight()
     self.direction = player_initial_direction -- direction of turret
     self.speed = player_speed
     self.dx = 0
@@ -70,13 +70,13 @@ function Player:update(dt)
     -- Press 'wasd' to change turret direction
     -- PROBLEM: elseif may not be best construction
     if love.keyboard.pressed['w'] then
-        self.direction = 3
+        self.direction = direction_up
     elseif love.keyboard.pressed['a'] then
-        self.direction = 1
+        self.direction = direction_left
     elseif love.keyboard.pressed['s'] then
-        self.direction = 4
+        self.direction = direction_down
     elseif love.keyboard.pressed['d'] then
-        self.direction = 2
+        self.direction = direction_right
     end
 
     -- update player
