@@ -21,5 +21,4 @@ end
 
 function Bullet:draw()
     love.graphics.draw(self.texture, self.x, self.y)
-    bullet_drawn = true
 end
