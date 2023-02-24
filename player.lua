@@ -6,16 +6,27 @@ local player_xpos = 100
 local player_ypos = 10
 local player_speed = 180
 local player_max_ypos = 140 -- max distance player can move down on screen
+local player_initial_direction = 4
 
 local max_ammo = 6 -- max bullets allowed
 local ammo_remaining = max_ammo -- keeps track of all bullets in play
 
 function Player:init()
-    self.texture = love.graphics.newImage("player.png") -- normal green rectangle
+    self.texture_left = love.graphics.newImage("player_left.png")
+    self.texture_right = love.graphics.newImage("player_right.png")
+    self.texture_up = love.graphics.newImage("player_up.png")
+    self.texture_down = love.graphics.newImage("player_down.png")
+    self.texture = {
+        self.texture_left,
+        self.texture_right,
+        self.texture_up,
+        self.texture_down
+    }
     self.x = player_xpos
     self.y = player_ypos
-    self.width = self.texture:getWidth()
-    self.height = self.texture:getHeight()
+    self.width = self.texture_left:getWidth()
+    self.height = self.texture_left:getHeight()
+    self.direction = player_initial_direction -- direction of turret
     self.speed = player_speed
     self.dx = 0
     self.dy = 0
@@ -56,6 +67,18 @@ function Player:update(dt)
         ammo_remaining = max_ammo
     end
 
+    -- Press 'wasd' to change turret direction
+    -- PROBLEM: elseif may not be best construction
+    if love.keyboard.pressed['w'] then
+        self.direction = 3
+    elseif love.keyboard.pressed['a'] then
+        self.direction = 1
+    elseif love.keyboard.pressed['s'] then
+        self.direction = 4
+    elseif love.keyboard.pressed['d'] then
+        self.direction = 2
+    end
+
     -- update player
     self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
@@ -72,7 +95,7 @@ function Player:update(dt)
 end
 
 function Player:draw()
-    love.graphics.draw(self.texture, self.x, self.y)
+    love.graphics.draw(self.texture[self.direction], self.x, self.y)
 
     -- draw bullet(s)
     for i, v in ipairs(all_bullets) do
