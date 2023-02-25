@@ -38,14 +38,17 @@ function Bullet:init(player, direction)
     self.move[direction_left] = Bullet:update_left(dt)
     self.move[direction_right] = Bullet:update_right(dt)
     self.move[direction_up] = Bullet:update_up(dt)
-    self.move[direction_down] = Bullet:update_down(dt) ]]
+    self.move[direction_down] = Bullet:update_down(dt) 
+    
+    Write functions here directly instead?
+    ]]
 end
 
 function Bullet:update(dt)
     if self.direction == direction_left then
         self.x = self.x - self.speed*dt
         if self.x<0 then -- bullet is offscreen
-        self.out_of_play = true
+            self.out_of_play = true
         end
     elseif self.direction == direction_right then
         self.x = self.x + self.speed*dt
