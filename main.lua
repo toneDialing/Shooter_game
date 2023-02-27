@@ -1,8 +1,7 @@
 -- Working game title: "Six Shots"
 
 Class = require 'class'
-require 'player'
-require 'enemy'
+require 'map'
 
 -- default window size in LÖVE
 WINDOW_WIDTH = 800
@@ -17,8 +16,7 @@ function love.load()
     -- refreshes after each update (see end of love.update() below)
     love.keyboard.pressed = {}
 
-    player = Player()
-    enemy = Enemy()
+    map = Map()
 end
 
 function love.keypressed(key)
@@ -30,14 +28,12 @@ function love.keypressed(key)
 end
 
 function love.update(dt)
-    player:update(dt)
-    enemy:update(dt)
+    map:update(dt)
 
     -- refreshes which keys have been pressed
     love.keyboard.pressed = {}
 end
 
 function love.draw()
-    player:draw()
-    enemy:draw()
+    map:draw()
 end

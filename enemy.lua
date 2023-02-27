@@ -4,15 +4,13 @@ require 'player'
 require 'collision'
 
 local enemy_speed = 100
-local initial_xpos = 400
-local initial_ypos = 500
 
-function Enemy:init()
+function Enemy:init(x_pos, y_pos)
     self.texture = love.graphics.newImage("enemy.png")
     self.width = self.texture:getWidth()
     self.height = self.texture:getHeight()
-    self.x = initial_xpos
-    self.y = initial_ypos
+    self.x = x_pos
+    self.y = y_pos
     self.dx = enemy_speed
     self.alive = true
 end
