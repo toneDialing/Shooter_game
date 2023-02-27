@@ -21,10 +21,10 @@ local ammo_remaining = max_ammo -- keeps track of all bullets in play
 
 function Player:init()
     self.texture = {}
-    self.texture[direction_left] = love.graphics.newImage("player_left.png")
-    self.texture[direction_right] = love.graphics.newImage("player_right.png")
-    self.texture[direction_up] = love.graphics.newImage("player_up.png")
-    self.texture[direction_down] = love.graphics.newImage("player_down.png")
+    self.texture[direction_left] = love.graphics.newImage("graphics/player_left.png")
+    self.texture[direction_right] = love.graphics.newImage("graphics/player_right.png")
+    self.texture[direction_up] = love.graphics.newImage("graphics/player_up.png")
+    self.texture[direction_down] = love.graphics.newImage("graphics/player_down.png")
     self.x = player_xpos
     self.y = player_ypos
     self.width = self.texture[direction_left]:getWidth() -- all direction textures have same dimensions
@@ -36,7 +36,7 @@ function Player:init()
 
     all_bullets = {}
 
-    standard_font = love.graphics.newFont("Capture it.ttf", 30)
+    standard_font = love.graphics.newFont("fonts/Capture it.ttf", 30)
     love.graphics.setFont(standard_font)
 end
 

@@ -8,7 +8,7 @@ local direction_up = "up"
 local direction_down = "down"
 
 function Bullet:init(player, direction)
-    self.texture = love.graphics.newImage("bullet.png")
+    self.texture = love.graphics.newImage("graphics/bullet.png")
     self.width = self.texture:getWidth()
     self.height = self.texture:getHeight()
     self.direction = direction
