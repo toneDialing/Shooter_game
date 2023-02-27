@@ -27,8 +27,6 @@ function Enemy:update(dt)
     -- Check for bullet collisions
     -- Positions of bullet and enemy are updated before checking for collision
     for i, v in ipairs(all_bullets) do
-        -- PROBLEM: bullet.x/bullet.y are oriented differently depending on
-        -- the location of the bullet
         if bullet_collision(v, self) then
             --[[
                 Bullet is marked out of play rather than immediately removed from
