@@ -19,6 +19,7 @@ local player_initial_direction = direction_down
 local max_ammo = 6 -- max bullets allowed
 local ammo_remaining = max_ammo -- keeps track of all bullets in play
 
+-- a player consists of a movable texture and bullets fired from that texture
 function Player:init()
     self.texture = {}
     self.texture[direction_left] = love.graphics.newImage("graphics/player_left.png")

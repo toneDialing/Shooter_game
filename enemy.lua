@@ -16,12 +16,16 @@ end
 function Enemy:update(dt)
     if self.alive then
         for i, v in ipairs(all_bullets) do
-            -- PROBLEM: if multiple enemies occupy the same space then
-            -- one bullet only kills a single enemy instead of all
             -- PROBLEM: bullet.x/bullet.y are oriented differently depending on
             -- the location of the bullet
             if bullet_collision(v, self) then
-                table.remove(all_bullets, i)
+                --[[
+                    Bullet is marked out of play rather than immediately removed from
+                    all_bullets so that other enemies have the opportunity to detect
+                    collision with it. Thus one bullet will kill multiple enemies if
+                    they're in the same spot.
+                ]]
+                v.out_of_play = true
                 self.alive = false
             end
         end
