@@ -3,26 +3,29 @@ Enemy = Class{}
 require 'player'
 require 'collision'
 
-local enemy_speed = 100
-
-function Enemy:init(x_pos, y_pos)
+function Enemy:init(x_pos, y_pos, speed)
     self.texture = love.graphics.newImage("graphics/enemy.png")
     self.width = self.texture:getWidth()
     self.height = self.texture:getHeight()
     self.x = x_pos
     self.y = y_pos
-    self.dx = enemy_speed
+    self.dx = speed
     self.alive = true
 end
 
 function Enemy:update(dt)
     if self.alive then
         for i, v in ipairs(all_bullets) do
+            -- PROBLEM: if multiple enemies occupy the same space then
+            -- one bullet only kills a single enemy instead of all
+            -- PROBLEM: bullet.x/bullet.y are oriented differently depending on
+            -- the location of the bullet
             if bullet_collision(v, self) then
                 table.remove(all_bullets, i)
                 self.alive = false
             end
         end
+        -- Enemies currently only move horizontally
         self.x = self.x + self.dx*dt
         if self.x<0 then
             self.x = 0
