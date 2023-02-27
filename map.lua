@@ -23,7 +23,14 @@ end
 
 function Map:draw()
     player:draw()
-    for _, v in ipairs(all_enemies) do
+    for i, v in ipairs(all_enemies) do
         v:draw()
+        --[[
+            Note: dead enemies/bullets are still drawn before removal
+            from table so that the collision is shown
+        ]]
+        if v.dead then
+            table.remove(all_enemies, i)
+        end
     end
 end
