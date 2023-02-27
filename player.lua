@@ -37,7 +37,7 @@ function Player:init()
 
     all_bullets = {}
 
-    standard_font = love.graphics.newFont("fonts/Capture it.ttf", 30)
+    standard_font = love.graphics.newFont("fonts/Capture_it.ttf", 30)
     love.graphics.setFont(standard_font)
 end
 

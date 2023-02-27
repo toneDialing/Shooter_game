@@ -8,20 +8,26 @@ local direction_up = "up"
 local direction_down = "down"
 
 function Bullet:init(player, direction)
-    self.texture = love.graphics.newImage("graphics/bullet.png")
+    self.direction = direction
+    self.speed = bullet_speed
+    self.out_of_play = false
+
+    -- gets image for bullet depending on bullet's direction
+    if self.direction == direction_left or self.direction == direction_right then
+        self.texture = love.graphics.newImage("graphics/bullet_horizontal.png")
+    else -- assumes bullet direction must be up or down
+        self.texture = love.graphics.newImage("graphics/bullet_vertical.png")
+    end
     self.width = self.texture:getWidth()
     self.height = self.texture:getHeight()
-    self.direction = direction
-    self.orientation = 0
-    -- set x and y position according to turret's direction, bearing rotation in mind
+
+    -- set x and y position according to turret's direction
     if self.direction == direction_left then
-        self.x = player.x
-        self.y = player.y + player.height/2 - self.width/2
-        self.orientation = math.pi/2
+        self.x = player.x + self.width
+        self.y = player.y + player.height/2 - self.height/2
     elseif self.direction == direction_right then
-        self.x = player.x + player.width + self.height
-        self.y = player.y + player.height/2 - self.width/2
-        self.orientation = math.pi/2
+        self.x = player.x + player.width
+        self.y = player.y + player.height/2 - self.height/2
     elseif self.direction == direction_up then
         self.x = player.x + player.width/2 - self.width/2
         self.y = player.y - self.height
@@ -29,8 +35,6 @@ function Bullet:init(player, direction)
         self.x = player.x + player.width/2 - self.width/2
         self.y = player.y + player.height
     end
-    self.speed = bullet_speed
-    self.out_of_play = false
 
     --[[
         self.move:

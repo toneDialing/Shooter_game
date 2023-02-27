@@ -8,8 +8,8 @@ function Map:init()
     player = Player()
     all_enemies = {
         Enemy(400, 500, 100),
-        Enemy(100, 400, 100),
-        Enemy(0, 400, 150),
+        Enemy(100, 400, 200),
+        Enemy(200, 550, 150),
         Enemy(700, 450, 250)
     }
 end
