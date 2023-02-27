@@ -2,6 +2,7 @@
 
 Class = require 'class'
 require 'player'
+require 'enemy'
 
 -- default window size in LÖVE
 WINDOW_WIDTH = 800
@@ -17,6 +18,7 @@ function love.load()
     love.keyboard.pressed = {}
 
     player = Player()
+    enemy = Enemy()
 end
 
 function love.keypressed(key)
@@ -29,6 +31,7 @@ end
 
 function love.update(dt)
     player:update(dt)
+    enemy:update(dt)
 
     -- refreshes which keys have been pressed
     love.keyboard.pressed = {}
@@ -36,4 +39,5 @@ end
 
 function love.draw()
     player:draw()
+    enemy:draw()
 end
