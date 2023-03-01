@@ -6,10 +6,6 @@ local player_xpos = 100
 local player_ypos = 10
 local player_speed = 180
 
---[[ scrapped this
-local player_max_ypos = 140 -- max distance player can move down on screen
-]]
-
 local direction_left = "left"
 local direction_right = "right"
 local direction_up = "up"
@@ -43,6 +39,11 @@ end
 
 function Player:update(dt)
     -- Press arrow keys to move
+    --[[ PROBLEM: two separate if blocks allow for diagonal movement, but it's
+        frustrating that the 'if' can override the 'elseif' (that is, left
+        overrides right and up overrides down but not vice-versa). I'd like to
+        make it so that if any key is newly pressed, it overrides any opposing
+        direction. ]]
     if love.keyboard.isDown('left') then
         self.dx = -player_speed
     elseif love.keyboard.isDown('right') then
