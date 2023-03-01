@@ -12,9 +12,10 @@ function love.load()
     love.window.setTitle("Six Shots")
     love.graphics.setDefaultFilter("nearest", "nearest")
 
-    -- table to keep track of which keys have been pressed once
+    -- tables to keep track of which keys have been pressed once or released
     -- refreshes after each update (see end of love.update() below)
     love.keyboard.pressed = {}
+    love.keyboard.released = {}
 
     map = Map()
 end
@@ -27,11 +28,16 @@ function love.keypressed(key)
     love.keyboard.pressed[key] = true
 end
 
+function love.keyreleased(key)
+    love.keyboard.released[key] = true
+end
+
 function love.update(dt)
     map:update(dt)
 
-    -- refreshes which keys have been pressed
+    -- refreshes which keys have been pressed/released
     love.keyboard.pressed = {}
+    love.keyboard.released = {}
 end
 
 function love.draw()

@@ -15,6 +15,12 @@ local player_initial_direction = direction_down
 local max_ammo = 6 -- max bullets allowed
 local ammo_remaining = max_ammo -- keeps track of all bullets in play
 
+-- variables to keep track of how long (in dt) each arrow key has been pressed for
+local left_pressed_time = 0
+local right_pressed_time = 0
+local up_pressed_time = 0
+local down_pressed_time = 0
+
 -- a player consists of a movable texture and bullets fired from that texture
 function Player:init()
     self.texture = {}
@@ -38,21 +44,57 @@ function Player:init()
 end
 
 function Player:update(dt)
+    -- Reset arrow key timer if an arrow key is released
+    if love.keyboard.released['left'] then
+        left_pressed_time = 0
+    end
+    if love.keyboard.released['right'] then
+        right_pressed_time = 0
+    end
+    if love.keyboard.released['up'] then
+        up_pressed_time = 0
+    end
+    if love.keyboard.released['down'] then
+        down_pressed_time = 0
+    end
+
     -- Press arrow keys to move
-    --[[ PROBLEM: two separate if blocks allow for diagonal movement, but it's
-        frustrating that the 'if' can override the 'elseif' (that is, left
-        overrides right and up overrides down but not vice-versa). I'd like to
-        make it so that if any key is newly pressed, it overrides any opposing
-        direction. ]]
+    --[[ PROBLEM: I've made it so that the most recently pressed key can override
+        the opposite pressed key (using timers to keep track of how long each key
+        has been pressed for), but now diagonal movement no longer works if
+        opposite keys are being pressed simultaneously. ]]
     if love.keyboard.isDown('left') then
-        self.dx = -player_speed
+        left_pressed_time = left_pressed_time + dt
+        if love.keyboard.isDown('right') then
+            right_pressed_time = right_pressed_time + dt
+            if right_pressed_time<left_pressed_time then
+                self.dx = player_speed
+            else
+                self.dx = -player_speed
+            end
+        else
+            self.dx = -player_speed
+        end
     elseif love.keyboard.isDown('right') then
+        right_pressed_time = right_pressed_time + dt
         self.dx = player_speed
-    else self.dx = 0
+    else
+        self.dx = 0
     end
     if love.keyboard.isDown('up') then
-        self.dy = -player_speed
+        up_pressed_time = up_pressed_time + dt
+        if love.keyboard.isDown('down') then
+            down_pressed_time = down_pressed_time + dt
+            if down_pressed_time<up_pressed_time then
+                self.dy = player_speed
+            else
+                self.dy = -player_speed
+            end
+        else
+            self.dy = -player_speed
+        end
     elseif love.keyboard.isDown('down') then
+        down_pressed_time = down_pressed_time + dt
         self.dy = player_speed
     else
         self.dy = 0
