@@ -7,6 +7,17 @@ require 'map'
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
+--[[ TO DO:
+    Basic:
+        Add walls
+        Add camera
+        Add different enemies
+    Later:
+        Curve bullets
+        Add locks/keys
+        Add ammo pouches?
+]]
+
 function love.load()
     love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
     love.window.setTitle("Six Shots")
