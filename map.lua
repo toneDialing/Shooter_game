@@ -1,6 +1,7 @@
 require 'player'
 require 'enemy'
 require 'enemy2'
+require 'enemy3'
 
 Map = Class{}
 
@@ -10,9 +11,11 @@ function Map:init()
     all_enemies = {
         Enemy(400, 500, 100),
         Enemy(100, 400, 200),
-        Enemy(200, 550, 150),
+        Enemy(200, 550, -150),
         Enemy(700, 450, 250),
-        Vert_enemy(300, 300, 300)
+        Vert_enemy(300, 300, 300),
+        Diag_enemy(150, 150, 200),
+        Diag_enemy(750, 550, -200)
     }
 end
 

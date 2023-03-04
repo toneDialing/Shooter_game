@@ -1,23 +1,32 @@
-Vert_enemy = Class{}
+Diag_enemy = Class{}
 
 require 'player'
 require 'enemy'
 require 'collision'
 
-Vert_enemy:include(Enemy)
+Diag_enemy:include(Enemy)
 
-function Vert_enemy:init(x_pos, y_pos, speed)
+function Diag_enemy:init(x_pos, y_pos, speed)
     self.texture = love.graphics.newImage("graphics/enemy.png")
     self.width = self.texture:getWidth()
     self.height = self.texture:getHeight()
     self.x = x_pos
     self.y = y_pos
+    self.dx = speed
     self.dy = speed
     self.dead = false
 end
 
-function Vert_enemy:update(dt)
+function Diag_enemy:update(dt)
+    self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
+    if self.x<0 then
+        self.x = 0
+        self.dx = -self.dx
+    elseif self.x>(WINDOW_WIDTH-self.width) then
+        self.x = WINDOW_WIDTH-self.width
+        self.dx = -self.dx
+    end
     if self.y<0 then
         self.y = 0
         self.dy = -self.dy
@@ -42,6 +51,6 @@ function Vert_enemy:update(dt)
     end
 end
 
-function Vert_enemy:draw()
+function Diag_enemy:draw()
     love.graphics.draw(self.texture, self.x, self.y)
 end
