@@ -23,7 +23,7 @@ function Bullet:init(player, direction)
 
     -- set x and y position according to turret's direction
     if self.direction == direction_left then
-        self.x = player.x + self.width
+        self.x = player.x - self.width
         self.y = player.y + player.height/2 - self.height/2
     elseif self.direction == direction_right then
         self.x = player.x + player.width
