@@ -1,6 +1,6 @@
 Bullet = Class{}
 
-bullet_speed = 300
+local bullet_speed = 500
 
 local direction_left = "left"
 local direction_right = "right"
