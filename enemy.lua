@@ -3,6 +3,7 @@ require 'collision'
 
 Enemy = Class{}
 
+-- Thus far all enemies are assumed to have the same dimensions
 function Enemy:init(x_pos, y_pos)
     self.texture = love.graphics.newImage("graphics/enemy_red.png")
     self.width = self.texture:getWidth()
