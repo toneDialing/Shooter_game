@@ -4,7 +4,7 @@ require 'collision'
 Enemy = Class{}
 
 function Enemy:init(x_pos, y_pos)
-    self.texture = love.graphics.newImage("graphics/enemy.png")
+    self.texture = love.graphics.newImage("graphics/enemy_red.png")
     self.width = self.texture:getWidth()
     self.height = self.texture:getHeight()
     self.x = x_pos
