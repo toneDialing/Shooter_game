@@ -4,7 +4,7 @@ Player = Class{}
 
 local player_xpos = 100
 local player_ypos = 10
-local player_speed = 180
+local player_speed = 250
 
 local direction_left = "left"
 local direction_right = "right"
@@ -12,7 +12,7 @@ local direction_up = "up"
 local direction_down = "down"
 local player_initial_direction = direction_down
 
-local max_ammo = 6 -- max bullets allowed
+local max_ammo = 66 -- max bullets allowed
 local ammo_remaining = max_ammo -- keeps track of all bullets in play
 
 -- variables to keep track of how long (in dt) each arrow key has been pressed for
@@ -156,5 +156,5 @@ function Player:draw()
         end
     end
 
-    love.graphics.print("Ammo: " .. ammo_remaining, 665, 5)
+    love.graphics.print("Ammo: " .. ammo_remaining, 655, 5)
 end
