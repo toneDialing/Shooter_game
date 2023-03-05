@@ -7,3 +7,12 @@ function bullet_collision(bullet, object)
         return true
     end
 end
+
+--[[ More generalized version:
+function collision(subject, object)
+    if (subject.x + subject.width) > object.x and subject.x < (object.x + object.width) and
+        (subject.y + subject.height) > object.y and subject.y < (object.y + object.height) then
+            return true
+    end
+end
+]]
