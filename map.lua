@@ -31,13 +31,14 @@ end
 
 function Map:draw()
     player:draw()
-    for i, v in ipairs(all_enemies) do
-        v:draw()
+    -- Loop backwards through table to avoid skips if elements are removed
+    for i=#all_enemies, 1, -1 do
+        all_enemies[i]:draw()
         --[[
             Note: dead enemies/bullets are still drawn before removal
             from table so that the collision is shown
         ]]
-        if v.dead then
+        if all_enemies[i].dead then
             table.remove(all_enemies, i)
         end
     end

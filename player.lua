@@ -145,9 +145,10 @@ function Player:draw()
     love.graphics.draw(self.texture[self.direction], self.x, self.y)
 
     -- draw bullet(s)
-    for i, v in ipairs(all_bullets) do
-        v:draw()
-        if v.out_of_play then -- bullet is offscreen
+    -- Loop backwards through table to avoid skips if elements are removed
+    for i=#all_bullets, 1, -1 do
+        all_bullets[i]:draw()
+        if all_bullets[i].out_of_play then -- bullet is offscreen
             table.remove(all_bullets, i) -- remove bullet object from table
             --[[ Supposedly Lua has automatic garbage management, but nonetheless I'm unsure
                 how to properly remove each bullet from memory once it's offscreen. The best
