@@ -3,25 +3,33 @@ require 'collision'
 
 Enemy = Class{}
 
-function Enemy:init(x_pos, y_pos, speed)
+function Enemy:init(x_pos, y_pos)
     self.texture = love.graphics.newImage("graphics/enemy.png")
     self.width = self.texture:getWidth()
     self.height = self.texture:getHeight()
     self.x = x_pos
     self.y = y_pos
-    self.dx = speed
+    self.dx = 0
+    self.dy = 0
     self.dead = false
 end
 
 function Enemy:update(dt)
-    -- Enemies currently only move horizontally
     self.x = self.x + self.dx*dt
+    self.y = self.y + self.dy*dt
     if self.x<0 then
         self.x = 0
         self.dx = -self.dx
     elseif self.x>(WINDOW_WIDTH-self.width) then
         self.x = WINDOW_WIDTH-self.width
         self.dx = -self.dx
+    end
+    if self.y<0 then
+        self.y = 0
+        self.dy = -self.dy
+    elseif self.y>(WINDOW_HEIGHT-self.height) then
+        self.y = WINDOW_HEIGHT-self.height
+        self.dy = -self.dy
     end
 
     -- Check for bullet collisions
