@@ -1,7 +1,7 @@
-Enemy = Class{}
-
 require 'player'
 require 'collision'
+
+Enemy = Class{}
 
 function Enemy:init(x_pos, y_pos, speed)
     self.texture = love.graphics.newImage("graphics/enemy.png")

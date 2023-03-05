@@ -1,8 +1,8 @@
-Diag_enemy = Class{}
-
 require 'player'
 require 'enemy'
 require 'collision'
+
+Diag_enemy = Class{}
 
 Diag_enemy:include(Enemy)
 

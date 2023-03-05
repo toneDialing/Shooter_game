@@ -1,19 +1,18 @@
-Vert_enemy = Class{}
-
 require 'player'
 require 'enemy'
 require 'collision'
 
-Vert_enemy:include(Enemy)
+Vert_enemy = Class{__includes = Enemy}
 
 function Vert_enemy:init(x_pos, y_pos, speed)
-    self.texture = love.graphics.newImage("graphics/enemy.png")
+    Enemy.init(self, x_pos, y_pos, speed)
+    --[[self.texture = love.graphics.newImage("graphics/enemy.png")
     self.width = self.texture:getWidth()
     self.height = self.texture:getHeight()
     self.x = x_pos
-    self.y = y_pos
+    self.y = y_pos]]
     self.dy = speed
-    self.dead = false
+    --self.dead = false
 end
 
 function Vert_enemy:update(dt)
