@@ -16,6 +16,8 @@ WINDOW_HEIGHT = 600
         Curve bullets
         Add locks/keys
         Add ammo pouches?
+    Fixes:
+        Iterate from end of lists for removing items
 ]]
 
 function love.load()
