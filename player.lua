@@ -131,12 +131,6 @@ function Player:update(dt)
     self.previous_y = self.y
     self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
-    -- collision checking for player (enemies)
-    for _, v in ipairs(all_enemies) do
-        if collision(self, v) then
-            game_state = "death"
-        end
-    end
     -- collision checking for player (walls)
     for _, v in ipairs(all_walls) do
         if collision(self, v) then

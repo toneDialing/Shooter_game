@@ -31,8 +31,16 @@ end
 function Map:update(dt)
     if game_state == "play" then
         player:update(dt)
+        -- Collision checking (enemies and player)
+        --[[
+            This collision checking isn't done in player:update(dt) because I want both player
+            and enemies to update before checking for collision.
+        ]]
         for _, v in ipairs(all_enemies) do
             v:update(dt)
+            if collision(player, v) then
+                game_state = "death"
+            end
         end
     end
 end
@@ -53,13 +61,19 @@ function Map:draw()
     for _, v in ipairs(all_walls) do
         v:draw()
     end
+
+    -- Win once all enemies are eliminated
     if #all_enemies == 0 then
         game_state = "level_clear"
     end
+
+    -- Loss message
     if game_state == "death" then
-        love.graphics.print("You died.\n Press 'p' to play again")
+        love.graphics.printf("You died.\nPress 'p' to play again.", 0, 100, WINDOW_WIDTH, "center")
     end
+
+    -- Win message
     if game_state == "level_clear" then
-        love.graphics.print("You win! Nice job.")
+        love.graphics.printf("You win! Well done.", 0, 100, WINDOW_WIDTH, "center")
     end
 end
