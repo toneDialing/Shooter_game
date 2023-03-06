@@ -7,6 +7,7 @@ Horizontal_enemy = Class{__includes = Enemy}
 function Horizontal_enemy:init(x_pos, y_pos, speed)
     Enemy.init(self, x_pos, y_pos)
     self.texture = love.graphics.newImage("graphics/enemy_purple.png")
+    -- Note width and height are still accurate as all enemies are same size for now
     self.dx = speed
 end
 

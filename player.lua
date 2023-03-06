@@ -140,7 +140,7 @@ function Player:update(dt)
                 self.x = adjust_horizontal_position(self, v)
             elseif was_vertically_aligned(self, v) then
                 self.y = adjust_vertical_position(self, v)
-            else
+            else -- precise corner collision
                 self.x = adjust_horizontal_position(self, v)
                 self.y = adjust_vertical_position(self, v)
             end

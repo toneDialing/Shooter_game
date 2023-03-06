@@ -23,6 +23,7 @@ function Enemy:update(dt)
     self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
 
+    -- OPTION: Could randomly choose to change dx or dy upon corner collision
     -- Collision checking
     for _, v in ipairs(all_walls) do
         if collision(self, v) then
@@ -32,7 +33,7 @@ function Enemy:update(dt)
             elseif was_vertically_aligned(self, v) then
                 self.y = adjust_vertical_position(self, v)
                 self.dy = -self.dy
-            else
+            else -- precise corner collision
                 self.x = adjust_horizontal_position(self, v)
                 self.y = adjust_vertical_position(self, v)
                 self.dx = -self.dx
