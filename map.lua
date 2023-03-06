@@ -9,7 +9,7 @@ Map = Class{}
 
 -- a map contains a player and enemies
 function Map:init()
-    player = Player(100, 10)
+    player = Player(110, 10)
     all_enemies = {
         Enemy(300, 300),
         Enemy(250, 150),
