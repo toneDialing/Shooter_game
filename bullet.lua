@@ -71,6 +71,11 @@ end
 
 function Bullet:update(dt)
     self.move[self.direction](dt)
+    for _, v in ipairs(all_walls) do
+        if collision(self, v) then
+            self.out_of_play = true
+        end
+    end
 end
 
 function Bullet:draw()
