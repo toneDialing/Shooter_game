@@ -30,6 +30,8 @@ function Player:init()
     self.texture[direction_down] = love.graphics.newImage("graphics/player_down.png")
     self.x = player_xpos
     self.y = player_ypos
+    self.previous_x = self.x
+    self.previous_y = self.y
     self.width = self.texture[direction_left]:getWidth() -- all direction textures have same dimensions
     self.height = self.texture[direction_left]:getHeight()
     self.direction = player_initial_direction -- direction of turret
@@ -127,8 +129,23 @@ function Player:update(dt)
     end
 
     -- update player
+    self.previous_x = self.x
+    self.previous_y = self.y
     self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
+    -- collision checking for player
+    for i, v in ipairs(all_walls) do
+        if wall_collision(self, v) then
+            if was_horizontally_aligned(self, v) then
+                self.x = adjust_horizontal_position(self, v)
+            elseif was_vertically_aligned(self, v) then
+                self.y = adjust_vertical_position(self, v)
+            else
+                self.x = adjust_horizontal_position(self, v)
+                self.y = adjust_vertical_position(self, v)
+            end
+        end
+    end
     -- bounds checking for player
     if self.x<0 then self.x=0
     elseif self.x>(WINDOW_WIDTH-self.width) then self.x=(WINDOW_WIDTH-self.width) end

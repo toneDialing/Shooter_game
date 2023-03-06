@@ -1,4 +1,5 @@
 require 'player'
+require 'wall'
 require 'enemy'
 require 'enemy_horizontal'
 require 'enemy_vertical'
@@ -19,6 +20,11 @@ function Map:init()
         Vertical_enemy(300, 300, 300),
         Diagonal_enemy(150, 150, 200),
         Diagonal_enemy(750, 550, -200)
+    }
+    all_walls = {
+        Wall(50, 50),
+        Wall(500, 500),
+        Wall(400, 200)
     }
 end
 
@@ -41,5 +47,8 @@ function Map:draw()
         if all_enemies[i].dead then
             table.remove(all_enemies, i)
         end
+    end
+    for _, v in ipairs(all_walls) do
+        v:draw()
     end
 end
