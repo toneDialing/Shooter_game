@@ -135,7 +135,7 @@ function Player:update(dt)
     self.y = self.y + self.dy*dt
     -- collision checking for player
     for _, v in ipairs(all_walls) do
-        if wall_collision(self, v) then
+        if collision(self, v) then
             if was_horizontally_aligned(self, v) then
                 self.x = adjust_horizontal_position(self, v)
             elseif was_vertically_aligned(self, v) then

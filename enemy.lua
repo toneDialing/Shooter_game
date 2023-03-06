@@ -25,7 +25,7 @@ function Enemy:update(dt)
 
     -- Collision checking
     for _, v in ipairs(all_walls) do
-        if wall_collision(self, v) then
+        if collision(self, v) then
             if was_horizontally_aligned(self, v) then
                 self.x = adjust_horizontal_position(self, v)
                 self.dx = -self.dx
@@ -60,7 +60,7 @@ function Enemy:update(dt)
     -- Check for bullet collisions
     -- Positions of bullet and enemy are updated before checking for collision
     for i, v in ipairs(all_bullets) do
-        if bullet_collision(v, self) then
+        if collision(v, self) then
             --[[
                 Bullet is marked out of play rather than immediately removed from
                 all_bullets so that other enemies have the opportunity to detect
