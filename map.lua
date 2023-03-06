@@ -19,12 +19,12 @@ function Map:init()
         Horizontal_enemy(700, 450, 250),
         Vertical_enemy(300, 300, 300),
         Diagonal_enemy(150, 150, 200),
-        Diagonal_enemy(750, 550, -200)
+        Diagonal_enemy(740, 560, -200)
     }
     all_walls = {
-        Wall(50, 50),
-        Wall(500, 500),
-        Wall(400, 200)
+        Wall(60, 50),
+        Wall(500, 520),
+        Wall(380, 200)
     }
 end
 

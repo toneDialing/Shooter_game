@@ -10,14 +10,38 @@ function Enemy:init(x_pos, y_pos)
     self.height = self.texture:getHeight()
     self.x = x_pos
     self.y = y_pos
+    self.previous_x = self.x
+    self.previous_y = self.y
     self.dx = 0
     self.dy = 0
     self.dead = false
 end
 
 function Enemy:update(dt)
+    self.previous_x = self.x
+    self.previous_y = self.y
     self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
+
+    -- Collision checking
+    for _, v in ipairs(all_walls) do
+        if wall_collision(self, v) then
+            if was_horizontally_aligned(self, v) then
+                self.x = adjust_horizontal_position(self, v)
+                self.dx = -self.dx
+            elseif was_vertically_aligned(self, v) then
+                self.y = adjust_vertical_position(self, v)
+                self.dy = -self.dy
+            else
+                self.x = adjust_horizontal_position(self, v)
+                self.y = adjust_vertical_position(self, v)
+                self.dx = -self.dx
+                self.dy = -self.dy
+            end
+        end
+    end
+
+    -- Bounds checking
     if self.x<0 then
         self.x = 0
         self.dx = -self.dx
