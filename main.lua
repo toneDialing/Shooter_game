@@ -1,4 +1,12 @@
 -- Working game title: "Six Shots"
+--[[
+        These game states should probably be stored in a table or something.
+    GAME STATES:
+        "play"
+        "death"
+        "level_clear"
+        "home_screen"
+]]
 
 Class = require 'class'
 require 'map'
@@ -72,6 +80,9 @@ end
 function love.draw()
     if game_state == "home_screen" then
         love.graphics.printf("66 Shots\nPress 'p' to play", 0, 100, WINDOW_WIDTH, "center")
+        -- PROBLEM: this image is being assigned twice (messy)
+        local player_icon = love.graphics.newImage("graphics/player_down.png")
+        love.graphics.draw(player_icon, 370, 300)
     else
         map:draw()
     end

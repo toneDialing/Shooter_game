@@ -38,9 +38,6 @@ function Player:init(x_pos, y_pos)
 
     all_bullets = {}
     self.ammo_remaining = max_ammo -- keeps track of all bullets in play
-
-    standard_font = love.graphics.newFont("fonts/Capture_it.ttf", 30)
-    love.graphics.setFont(standard_font)
 end
 
 function Player:update(dt)
