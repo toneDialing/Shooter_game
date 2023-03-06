@@ -9,7 +9,7 @@ Map = Class{}
 
 -- a map contains a player and enemies
 function Map:init()
-    player = Player()
+    player = Player(100, 10)
     all_enemies = {
         Enemy(300, 300),
         Enemy(250, 150),
@@ -29,9 +29,11 @@ function Map:init()
 end
 
 function Map:update(dt)
-    player:update(dt)
-    for _, v in ipairs(all_enemies) do
-        v:update(dt)
+    if game_state == "play" then
+        player:update(dt)
+        for _, v in ipairs(all_enemies) do
+            v:update(dt)
+        end
     end
 end
 
@@ -50,5 +52,14 @@ function Map:draw()
     end
     for _, v in ipairs(all_walls) do
         v:draw()
+    end
+    if #all_enemies == 0 then
+        game_state = "level_clear"
+    end
+    if game_state == "death" then
+        love.graphics.print("You died.\n Press 'p' to play again")
+    end
+    if game_state == "level_clear" then
+        love.graphics.print("You win! Nice job.")
     end
 end

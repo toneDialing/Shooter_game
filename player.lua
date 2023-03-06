@@ -2,8 +2,6 @@ require 'bullet'
 
 Player = Class{}
 
-local player_xpos = 100
-local player_ypos = 10
 local player_speed = 250
 
 local direction_left = "left"
@@ -13,7 +11,6 @@ local direction_down = "down"
 local player_initial_direction = direction_down
 
 local max_ammo = 66 -- max bullets allowed
-local ammo_remaining = max_ammo -- keeps track of all bullets in play
 
 -- variables to keep track of how long (in dt) each arrow key has been pressed for
 local left_pressed_time = 0
@@ -22,14 +19,14 @@ local up_pressed_time = 0
 local down_pressed_time = 0
 
 -- a player consists of a movable texture and bullets fired from that texture
-function Player:init()
+function Player:init(x_pos, y_pos)
     self.texture = {}
     self.texture[direction_left] = love.graphics.newImage("graphics/player_left.png")
     self.texture[direction_right] = love.graphics.newImage("graphics/player_right.png")
     self.texture[direction_up] = love.graphics.newImage("graphics/player_up.png")
     self.texture[direction_down] = love.graphics.newImage("graphics/player_down.png")
-    self.x = player_xpos
-    self.y = player_ypos
+    self.x = x_pos
+    self.y = y_pos
     self.previous_x = self.x
     self.previous_y = self.y
     self.width = self.texture[direction_left]:getWidth() -- all direction textures have same dimensions
@@ -40,6 +37,7 @@ function Player:init()
     self.dy = 0
 
     all_bullets = {}
+    self.ammo_remaining = max_ammo -- keeps track of all bullets in play
 
     standard_font = love.graphics.newFont("fonts/Capture_it.ttf", 30)
     love.graphics.setFont(standard_font)
@@ -116,16 +114,16 @@ function Player:update(dt)
 
     -- Press 'space' to shoot
     if love.keyboard.pressed['space'] then
-        if ammo_remaining > 0 then
+        if self.ammo_remaining > 0 then
             bullet = Bullet(self, self.direction)
             table.insert(all_bullets, bullet)
-            ammo_remaining = ammo_remaining - 1
+            self.ammo_remaining = self.ammo_remaining - 1
         end
     end
 
     -- Press 'r' to reload
     if love.keyboard.pressed['r'] then
-        ammo_remaining = max_ammo
+        self.ammo_remaining = max_ammo
     end
 
     -- update player
@@ -133,7 +131,13 @@ function Player:update(dt)
     self.previous_y = self.y
     self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
-    -- collision checking for player
+    -- collision checking for player (enemies)
+    for _, v in ipairs(all_enemies) do
+        if collision(self, v) then
+            game_state = "death"
+        end
+    end
+    -- collision checking for player (walls)
     for _, v in ipairs(all_walls) do
         if collision(self, v) then
             if was_horizontally_aligned(self, v) then
@@ -174,5 +178,5 @@ function Player:draw()
         end
     end
 
-    love.graphics.print("Ammo: " .. ammo_remaining, 655, 5)
+    love.graphics.print("Ammo: " .. self.ammo_remaining, 655, 5)
 end

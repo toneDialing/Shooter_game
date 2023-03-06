@@ -31,6 +31,8 @@ function love.load()
     love.keyboard.released = {}
 
     map = Map()
+
+    game_state = "play"
 end
 
 function love.keypressed(key)
@@ -46,7 +48,14 @@ function love.keyreleased(key)
 end
 
 function love.update(dt)
-    map:update(dt)
+    if game_state == "play" then
+        map:update(dt)
+    elseif game_state == "death" or game_state == "level_clear" then
+        if love.keyboard.pressed['p'] then
+            map = Map()
+            game_state = "play"
+        end
+    end
 
     -- refreshes which keys have been pressed/released
     love.keyboard.pressed = {}
