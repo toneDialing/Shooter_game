@@ -8,24 +8,10 @@ require 'enemy_diagonal'
 Map = Class{}
 
 -- a map contains a player and enemies
-function Map:init()
-    player = Player(110, 10)
-    all_enemies = {
-        Enemy(300, 300),
-        Enemy(250, 150),
-        Horizontal_enemy(400, 500, 100),
-        Horizontal_enemy(100, 400, 200),
-        Horizontal_enemy(200, 550, -150),
-        Horizontal_enemy(700, 450, 250),
-        Vertical_enemy(300, 300, 300),
-        Diagonal_enemy(150, 150, 200),
-        Diagonal_enemy(740, 560, -200)
-    }
-    all_walls = {
-        Wall(60, 50),
-        Wall(500, 520),
-        Wall(380, 200)
-    }
+function Map:init(player_init, enemy_init, wall_init)
+    player = player_init
+    all_enemies = enemy_init
+    all_walls = wall_init
 end
 
 function Map:update(dt)

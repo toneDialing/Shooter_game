@@ -10,6 +10,7 @@
 
 Class = require 'class'
 require 'map'
+require 'levels'
 
 -- default window size in LÖVE
 WINDOW_WIDTH = 800
@@ -41,7 +42,9 @@ function love.load()
     love.keyboard.pressed = {}
     love.keyboard.released = {}
 
-    map = Map()
+    level_number = 1
+    max_levels = 2
+    map = all_maps[level_number]()
 
     game_state = "home_screen"
 end
@@ -63,12 +66,19 @@ function love.update(dt)
         map:update(dt)
     elseif game_state == "death" or game_state == "home_screen" then
         if love.keyboard.pressed['p'] or love.keyboard.pressed['return'] then
-            map = Map()
+            map = all_maps[level_number]()
             game_state = "play"
         end
     elseif game_state == "level_clear" then
         if love.keyboard.pressed['p'] or love.keyboard.pressed['return'] then
-            game_state = "home_screen"
+            if level_number < max_levels then
+                level_number = level_number + 1
+                map = all_maps[level_number]()
+                game_state = "play"
+            else
+                level_number = 1
+                game_state = "home_screen"
+            end
         end
     end
 
