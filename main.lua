@@ -28,7 +28,7 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
 local level_number = 1
-local max_levels = 2
+local max_levels = 3
 
 function love.load()
     love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)

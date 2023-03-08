@@ -32,6 +32,11 @@ function Map:update(dt)
 end
 
 function Map:draw()
+    for _, v in ipairs(all_walls) do
+        v:draw()
+    end
+    -- PROBLEM: Enemies get drawn over the player, and thus over ammo display
+    -- Make ammo part of HUD or draw enemies first
     player:draw()
     -- Loop backwards through table to avoid skips if elements are removed
     for i=#all_enemies, 1, -1 do
@@ -43,9 +48,6 @@ function Map:draw()
         if all_enemies[i].dead then
             table.remove(all_enemies, i)
         end
-    end
-    for _, v in ipairs(all_walls) do
-        v:draw()
     end
 
     -- Win once all enemies are eliminated

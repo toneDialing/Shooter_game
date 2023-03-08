@@ -49,5 +49,54 @@ all_maps = {
             Wall(650, 100),
             Wall(700, 50)
         })
+    end,
+    [3] = function() return Map(
+        Player(370, 280),
+        {
+            Horizontal_enemy(40, 40, 400),
+            Vertical_enemy(40, 40, 400),
+            Horizontal_enemy(720, 40, -400),
+            Vertical_enemy(720, 40, 400),
+            Horizontal_enemy(40, 520, 400),
+            Vertical_enemy(40, 520, -400),
+            Horizontal_enemy(720, 520, -400),
+            Vertical_enemy(720, 520, -400),
+            Diagonal_enemy(100, 100, 450),
+            Diagonal_enemy(130, 130, -450),
+            Diagonal_enemy(700, 100, -450),
+            Diagonal_enemy(670, 130, 450),
+            Diagonal_enemy(350, 600, 500),
+            Diagonal_enemy(375, 600, -500),
+            Diagonal_enemy(400, 600, 500),
+            Diagonal_enemy(425, 600, -500)
+        },
+        {
+            Wall(280, 220),
+            Wall(320, 220),
+            Wall(440, 220),
+            Wall(480, 220),
+            Wall(280, 260),
+            Wall(280, 300),
+            Wall(280, 340),
+            Wall(320, 340),
+            Wall(360, 340),
+            Wall(400, 340),
+            Wall(440, 340),
+            Wall(480, 340),
+            Wall(480, 300),
+            Wall(480, 260),
+            Wall(0, 0),
+            Wall(40, 0),
+            Wall(0, 40),
+            Wall(760, 0),
+            Wall(720, 0),
+            Wall(760, 40),
+            Wall(0, 560),
+            Wall(0, 520),
+            Wall(40, 560),
+            Wall(760, 560),
+            Wall(720, 560),
+            Wall(760, 520)
+        })
     end
 }
