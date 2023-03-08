@@ -24,6 +24,9 @@ function Enemy:update(dt)
     self.y = self.y + self.dy*dt
 
     -- OPTION: Could randomly choose to change dx or dy upon corner collision
+    -- PROBLEM: When multiple walls are combined, the code doesn't work as expected.
+    -- e.g., enemies bounce off corners when it's supposed to be a smooth wall, because
+    -- they're hitting the corner of a single wall object.
     -- Collision checking
     for _, v in ipairs(all_walls) do
         if collision(self, v) then
