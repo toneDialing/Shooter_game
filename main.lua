@@ -8,14 +8,6 @@
         "home_screen"
 ]]
 
-Class = require 'class'
-require 'map'
-require 'levels'
-
--- default window size in LÖVE
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
-
 --[[ TO DO:
     Basic:
         Add walls
@@ -25,9 +17,18 @@ WINDOW_HEIGHT = 600
         Curve bullets
         Add locks/keys
         Add ammo pouches?
-    Fixes:
-        Iterate from end of lists for removing items
 ]]
+
+Class = require 'class'
+require 'map'
+require 'levels'
+
+-- default window size in LÖVE
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+
+local level_number = 1
+local max_levels = 2
 
 function love.load()
     love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
@@ -42,8 +43,6 @@ function love.load()
     love.keyboard.pressed = {}
     love.keyboard.released = {}
 
-    level_number = 1
-    max_levels = 2
     map = all_maps[level_number]()
 
     game_state = "home_screen"
@@ -72,11 +71,18 @@ function love.update(dt)
     elseif game_state == "level_clear" then
         if love.keyboard.pressed['p'] or love.keyboard.pressed['return'] then
             if level_number < max_levels then
+                --[[
+                    NOTE: level_number should only be incremented once per clear,
+                    so it must either be incremented upon a key press or an additional
+                    variable must keep track of whether it's been incremented already.
+                    Otherwise it would continually increment per update(dt) while in the
+                    "level_clear" game state.
+                ]]
                 level_number = level_number + 1
                 map = all_maps[level_number]()
                 game_state = "play"
-            else
-                level_number = 1
+            else -- all levels completed
+                level_number = 1 -- restart the game
                 game_state = "home_screen"
             end
         end

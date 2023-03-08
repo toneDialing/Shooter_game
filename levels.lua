@@ -1,5 +1,11 @@
 require 'map'
 
+--[[
+    For some reason it seems as though I need to have the [1], [2], etc. for each table entry,
+    even though I thought Lua supplied integer indices as defaults if no specific key
+    is provided.
+]]
+
 all_maps = {
     [1] = function() return Map(
         Player(110, 10),
