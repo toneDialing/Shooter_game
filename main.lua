@@ -10,9 +10,9 @@
 
 --[[ TO DO:
     Basic:
-        Add walls
         Add camera
-        Add different enemies
+        Add more enemies
+        Adjust level clear vs. game win texts
     Later:
         Curve bullets
         Add locks/keys
