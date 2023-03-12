@@ -19,6 +19,13 @@
         Add ammo pouches?
 ]]
 
+--[[
+    add game state variables:
+    local play_game = "play"
+    local home_screen = "home screen"
+    etc.
+]]
+
 Class = require 'class'
 require 'map'
 require 'levels'
