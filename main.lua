@@ -19,12 +19,10 @@
         Add ammo pouches?
 ]]
 
---[[
-    add game state variables:
-    local play_game = "play"
-    local home_screen = "home screen"
-    etc.
-]]
+local play_game = "play"
+local death = "death"
+local home_screen = "home_screen"
+local level_clear = "level_clear"
 
 Class = require 'class'
 require 'map'
@@ -52,7 +50,7 @@ function love.load()
 
     map = all_maps[level_number]()
 
-    game_state = "home_screen"
+    game_state = home_screen
 end
 
 function love.keypressed(key)
@@ -68,14 +66,14 @@ function love.keyreleased(key)
 end
 
 function love.update(dt)
-    if game_state == "play" then
+    if game_state == play_game then
         map:update(dt)
-    elseif game_state == "death" or game_state == "home_screen" then
+    elseif game_state == death or game_state == home_screen then
         if love.keyboard.pressed['p'] or love.keyboard.pressed['return'] then
             map = all_maps[level_number]()
-            game_state = "play"
+            game_state = play_game
         end
-    elseif game_state == "level_clear" then
+    elseif game_state == level_clear then
         if love.keyboard.pressed['p'] or love.keyboard.pressed['return'] then
             if level_number < max_levels then
                 --[[
@@ -87,10 +85,10 @@ function love.update(dt)
                 ]]
                 level_number = level_number + 1
                 map = all_maps[level_number]()
-                game_state = "play"
+                game_state = play_game
             else -- all levels completed
                 level_number = 1 -- restart the game
-                game_state = "home_screen"
+                game_state = home_screen
             end
         end
     end
@@ -101,7 +99,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    if game_state == "home_screen" then
+    if game_state == home_screen then
         love.graphics.printf("66 Shots\nPress 'p' to play", 0, 100, WINDOW_WIDTH, "center")
         -- PROBLEM: this image is being assigned twice (messy)
         local player_icon = love.graphics.newImage("graphics/player_down.png")
