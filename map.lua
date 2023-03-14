@@ -7,6 +7,13 @@ require 'enemy_diagonal'
 
 Map = Class{}
 
+-- These local variables are duplicates of local variables in main.lua
+-- Should they all be global instead?
+local play_game = "play"
+local death = "death"
+local home_screen = "home_screen"
+local level_clear = "level_clear"
+
 -- a map contains a player and enemies
 function Map:init(player_init, enemy_init, wall_init)
     player = player_init
@@ -15,7 +22,7 @@ function Map:init(player_init, enemy_init, wall_init)
 end
 
 function Map:update(dt)
-    if game_state == "play" then
+    if game_state == play_game then
         player:update(dt)
         -- Collision checking (enemies and player)
         --[[
@@ -25,7 +32,7 @@ function Map:update(dt)
         for _, v in ipairs(all_enemies) do
             v:update(dt)
             if collision(player, v) then
-                game_state = "death"
+                game_state = death
             end
         end
     end
@@ -52,16 +59,16 @@ function Map:draw()
 
     -- Win once all enemies are eliminated
     if #all_enemies == 0 then
-        game_state = "level_clear"
+        game_state = level_clear
     end
 
     -- Loss message
-    if game_state == "death" then
+    if game_state == death then
         love.graphics.printf("You died.\nPress 'p' to play again.", 0, 100, WINDOW_WIDTH, "center")
     end
 
     -- Win message
-    if game_state == "level_clear" then
+    if game_state == level_clear then
         love.graphics.printf("You win! Well done.", 0, 100, WINDOW_WIDTH, "center")
     end
 end
