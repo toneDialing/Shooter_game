@@ -6,6 +6,11 @@ require 'map'
     is provided.
 ]]
 
+--[[
+    Level design: provide introduction to enemies (and bullet trajectories?) slowly
+    Initial level could be small wall with stationary enemy behind, much like Wii tanks
+]]
+
 all_maps = {
     [1] = function() return Map(
         Player(110, 10),
