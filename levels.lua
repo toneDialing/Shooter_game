@@ -11,6 +11,9 @@ require 'map'
     Initial level could be small wall with stationary enemy behind, much like Wii tanks
 ]]
 
+--[[
+    TO DO: Improve design of level implementation, perhaps with level map
+]]
 all_maps = {
     [1] = function() return Map(
         Player(110, 10),
