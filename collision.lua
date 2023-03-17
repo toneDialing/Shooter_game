@@ -11,6 +11,12 @@ end
     to combine them into a single function that takes direction as a parameter.
 ]]
 
+--[[
+    PROBLEM: Corner collisions need to be fixed to avoid diagonal rebounds along
+    straight walls. Multiple walls in a row still currently have "corners" embedded
+    within them.
+]]
+
 function was_horizontally_aligned(subject, object)
     return (subject.previous_y + subject.height) > object.y and
         subject.previous_y < (object.y + object.height)
