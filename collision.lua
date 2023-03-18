@@ -15,6 +15,7 @@ end
     PROBLEM: Corner collisions need to be fixed to avoid diagonal rebounds along
     straight walls. Multiple walls in a row still currently have "corners" embedded
     within them.
+    (Also noted in enemy.lua)
 ]]
 
 function was_horizontally_aligned(subject, object)
