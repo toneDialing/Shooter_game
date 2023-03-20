@@ -7,13 +7,6 @@ require 'enemy_diagonal'
 
 Map = Class{}
 
--- These local variables are duplicates of local variables in main.lua
--- Should they all be global instead?
-local play_game = "play"
-local death = "death"
-local home_screen = "home_screen"
-local level_clear = "level_clear"
-
 -- a map contains a player and enemies
 function Map:init(player_init, enemy_init, wall_init)
     player = player_init

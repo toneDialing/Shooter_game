@@ -19,10 +19,11 @@
         Add ammo pouches?
 ]]
 
-local play_game = "play"
-local death = "death"
-local home_screen = "home_screen"
-local level_clear = "level_clear"
+-- Global game state variables
+play_game = "play"
+death = "death"
+home_screen = "home_screen"
+level_clear = "level_clear"
 
 Class = require 'class'
 require 'map'
