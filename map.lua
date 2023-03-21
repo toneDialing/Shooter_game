@@ -62,6 +62,10 @@ function Map:draw()
 
     -- Win message
     if game_state == level_clear then
-        love.graphics.printf("You win! Well done.", 0, 100, WINDOW_WIDTH, "center")
+        if level_number == max_levels then
+            love.graphics.printf("You win! Well done.", 0, 100, WINDOW_WIDTH, "center")
+        else
+            love.graphics.printf("Level clear!", 0, 100, WINDOW_WIDTH, "center")
+        end
     end
 end
