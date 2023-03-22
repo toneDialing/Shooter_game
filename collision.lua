@@ -28,6 +28,7 @@ function was_vertically_aligned(subject, object)
         subject.previous_x < (object.x + object.width)
 end
 
+-- Places subject to the immediate right/left of object, depending on relative position
 function adjust_horizontal_position(subject, object)
     if subject.width < object.width then
         if subject.x < (object.x + ((subject.width+object.width)/2 - subject.width)) then
@@ -44,6 +45,7 @@ function adjust_horizontal_position(subject, object)
     end
 end
 
+-- Places subject immediately above/below object, depending on relative position
 function adjust_vertical_position(subject, object)
     if subject.height < object.height then
         if subject.y < (object.y + ((subject.height+object.height)/2 - subject.height)) then
