@@ -10,6 +10,12 @@ local direction_up = "up"
 local direction_down = "down"
 local player_initial_direction = direction_down
 
+--[[
+    PLAY TESTING: Played with only 16 bullets; more fun and strategic! Adding an in-game
+    timer as a high score metric could be cool, to encourage players to risk precision
+    in order to achieve faster clears.
+    Max_ammo could also vary per level.
+]]
 local max_ammo = 66 -- max bullets allowed
 
 -- variables to keep track of how long (in dt) each arrow key has been pressed for
