@@ -12,6 +12,7 @@
     Basic:
         Add camera
         Add more enemies
+        Add timer
     Later:
         Curve bullets
         Add locks/keys
