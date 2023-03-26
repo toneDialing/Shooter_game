@@ -109,4 +109,5 @@ function love.draw()
     else
         map:draw()
     end
+    love.graphics.printf(love.timer.getTime(), 5, 5, WINDOW_WIDTH, "left")
 end
