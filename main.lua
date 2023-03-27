@@ -109,5 +109,7 @@ function love.draw()
     else
         map:draw()
     end
+    -- Update to refresh each level and only run during "play" game state
+    -- PROBLEM: fix max number of digits displayed
     love.graphics.printf(love.timer.getTime(), 5, 5, WINDOW_WIDTH, "left")
 end
