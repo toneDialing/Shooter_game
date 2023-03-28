@@ -13,7 +13,11 @@ require 'map'
 
 --[[
     TO DO: Improve design of level implementation, perhaps with level map
+    -- should all objects be the same size?
 ]]
+
+-- Must update max_levels whenever altering this table
+-- This seems like poor programming; perhaps add last_level variable to maps
 all_maps = {
     [1] = function() return Map(
         Player(110, 10),
