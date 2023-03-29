@@ -20,6 +20,17 @@ require 'map'
 -- This seems like poor programming; perhaps add last_level variable to maps
 all_maps = {
     [1] = function() return Map(
+        Player(100, 280),
+        {
+            Enemy(500, 280)
+        },
+        {
+            Wall(380, 240),
+            Wall(380, 280),
+            Wall(380, 320)
+        })
+    end,
+    [2] = function() return Map(
         Player(110, 10),
         {
             Enemy(300, 300),
@@ -38,7 +49,7 @@ all_maps = {
             Wall(380, 200)
         })
     end,
-    [2] = function() return Map(
+    [3] = function() return Map(
         Player(500, 550),
         {
             Diagonal_enemy(300, 100, 250),
@@ -62,7 +73,7 @@ all_maps = {
             Wall(700, 50)
         })
     end,
-    [3] = function() return Map(
+    [4] = function() return Map(
         Player(370, 280),
         {
             Horizontal_enemy(40, 40, 400),

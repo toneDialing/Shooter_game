@@ -35,7 +35,7 @@ WINDOW_HEIGHT = 600
 
 -- Global level variables
 level_number = 1
-max_levels = 3
+max_levels = 4
 
 function love.load()
     love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
