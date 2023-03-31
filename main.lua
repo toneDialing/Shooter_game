@@ -109,6 +109,7 @@ function love.draw()
     else
         map:draw()
         -- PROBLEM: fix max number of digits displayed
+        -- PROBLEM: timer doesn't pause or reset when leaving play_game state
         if game_state == play_game then
             love.graphics.printf(love.timer.getTime(), 5, 5, WINDOW_WIDTH, "left")
         end
